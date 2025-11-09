@@ -492,12 +492,8 @@ Hackathon/
 │   └── vite.config.ts            # Vite config
 │
 ├── .dockerignore                 # Docker ignore rules
-├── .env.example                  # Root environment template (for Docker)
-├── .gitignore                    # Root git ignore rules
 ├── docker-compose.yml            # Docker Compose configuration
-├── ENV_SETUP.md                  # Environment variables guide
-├── README.md                     # This file
-└── README_DOCKER.md              # Docker deployment guide
+└── README.md                     # This file
 ```
 
 ---
