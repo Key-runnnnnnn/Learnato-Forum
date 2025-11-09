@@ -119,7 +119,7 @@ Before you begin, ensure you have the following installed:
 
 ```bash
 git clone <repository-url>
-cd Hackathon
+cd Learnato-Forum
 ```
 
 ### 2️⃣ Setup Backend
@@ -131,7 +131,6 @@ cd backend
 npm install
 
 # Create .env file
-cp .env.example .env
 
 # Edit .env with your credentials
 nano .env
@@ -156,7 +155,6 @@ cd ../frontend
 npm install
 
 # Create .env file
-cp .env.example .env
 
 # Edit .env with your credentials
 nano .env
@@ -303,7 +301,6 @@ npm run preview
 1. **Create root .env file:**
 
 ```bash
-cp .env.example .env
 nano .env
 ```
 
@@ -495,12 +492,8 @@ Hackathon/
 │   └── vite.config.ts            # Vite config
 │
 ├── .dockerignore                 # Docker ignore rules
-├── .env.example                  # Root environment template (for Docker)
-├── .gitignore                    # Root git ignore rules
 ├── docker-compose.yml            # Docker Compose configuration
-├── ENV_SETUP.md                  # Environment variables guide
-├── README.md                     # This file
-└── README_DOCKER.md              # Docker deployment guide
+└── README.md                     # This file
 ```
 
 ---
