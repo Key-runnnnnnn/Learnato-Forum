@@ -4,11 +4,10 @@ import PostCard from "./PostCard";
 interface PostListProps {
   posts: Post[];
   onUpvote: (postId: string) => void;
-  onDownvote: (postId: string) => void;
   loading?: boolean;
 }
 
-const PostList = ({ posts, onUpvote, onDownvote, loading }: PostListProps) => {
+const PostList = ({ posts, onUpvote, loading }: PostListProps) => {
   if (loading) {
     return (
       <div className="flex justify-center items-center py-12">
@@ -30,12 +29,7 @@ const PostList = ({ posts, onUpvote, onDownvote, loading }: PostListProps) => {
   return (
     <div className="space-y-4">
       {posts.map((post) => (
-        <PostCard
-          key={post._id}
-          post={post}
-          onUpvote={onUpvote}
-          onDownvote={onDownvote}
-        />
+        <PostCard key={post._id} post={post} onUpvote={onUpvote} />
       ))}
     </div>
   );

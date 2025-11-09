@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import {
   FaArrowUp,
-  FaArrowDown,
   FaComment,
   FaCheckCircle,
   FaUser,
@@ -13,15 +12,13 @@ import { useAuth } from "../context/AuthContext";
 interface PostCardProps {
   post: Post;
   onUpvote: (postId: string) => void;
-  onDownvote: (postId: string) => void;
 }
 
-const PostCard = ({ post, onUpvote, onDownvote }: PostCardProps) => {
+const PostCard = ({ post, onUpvote }: PostCardProps) => {
   const { user, setShowLoginModal } = useAuth();
 
-  // Check if current user has upvoted or downvoted this post
+  // Check if current user has upvoted this post
   const hasUpvoted = user && post.upvotedBy?.includes(user.uid);
-  const hasDownvoted = user && post.downvotedBy?.includes(user.uid);
 
   const handleUpvote = () => {
     if (!user) {
@@ -29,14 +26,6 @@ const PostCard = ({ post, onUpvote, onDownvote }: PostCardProps) => {
       return;
     }
     onUpvote(post._id);
-  };
-
-  const handleDownvote = () => {
-    if (!user) {
-      setShowLoginModal(true);
-      return;
-    }
-    onDownvote(post._id);
   };
 
   const formatDate = (dateString: string) => {
@@ -84,32 +73,6 @@ const PostCard = ({ post, onUpvote, onDownvote }: PostCardProps) => {
             <FaArrowUp />
           </button>
           <span className="font-bold text-lg text-gray-700">{post.votes}</span>
-          <button
-            onClick={handleDownvote}
-            className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors ${
-              !user
-                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                : hasDownvoted
-                ? "bg-red-500 text-white hover:bg-red-600 cursor-pointer"
-                : "bg-gray-100 hover:bg-red-100 hover:text-red-600 cursor-pointer"
-            }`}
-            aria-label={
-              user
-                ? hasDownvoted
-                  ? "Remove downvote"
-                  : "Downvote"
-                : "Login to downvote"
-            }
-            title={
-              user
-                ? hasDownvoted
-                  ? "Remove downvote"
-                  : "Downvote this post"
-                : "Login to downvote"
-            }
-          >
-            <FaArrowDown />
-          </button>
         </div>
 
         {/* Post Content */}

@@ -75,31 +75,6 @@ const HomePage = () => {
     }
   };
 
-  // Downvote post
-  const handleDownvote = async (postId: string) => {
-    if (!user) return;
-
-    try {
-      const response = await postsAPI.downvotePost(postId, user.uid);
-
-      // Update local state with new upvotedBy and downvotedBy arrays
-      setPosts((prevPosts) =>
-        prevPosts.map((post) =>
-          post._id === postId
-            ? {
-                ...post,
-                votes: response.data.votes,
-                upvotedBy: response.data.upvotedBy,
-                downvotedBy: response.data.downvotedBy,
-              }
-            : post
-        )
-      );
-    } catch (error) {
-      console.error("Error downvoting post:", error);
-    }
-  };
-
   // Handle filter changes
   const handleClearFilters = () => {
     setSortBy("votes");
@@ -194,12 +169,7 @@ const HomePage = () => {
       </div>
 
       {/* Posts List */}
-      <PostList
-        posts={posts}
-        onUpvote={handleUpvote}
-        onDownvote={handleDownvote}
-        loading={loading}
-      />
+      <PostList posts={posts} onUpvote={handleUpvote} loading={loading} />
     </div>
   );
 };

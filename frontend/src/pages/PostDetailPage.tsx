@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
   FaArrowLeft,
   FaArrowUp,
-  FaArrowDown,
   FaCheckCircle,
   FaUser,
   FaClock,
@@ -77,36 +76,11 @@ const PostDetailPage = () => {
               ...prev,
               votes: response.data.votes,
               upvotedBy: response.data.upvotedBy,
-              downvotedBy: response.data.downvotedBy,
             }
           : null
       );
     } catch (error) {
       console.error("Error upvoting post:", error);
-    }
-  };
-
-  // Downvote post
-  const handleDownvote = async () => {
-    if (!user) {
-      setShowLoginModal(true);
-      return;
-    }
-    try {
-      if (!id) return;
-      const response = await postsAPI.downvotePost(id, user.uid);
-      setPost((prev) =>
-        prev
-          ? {
-              ...prev,
-              votes: response.data.votes,
-              upvotedBy: response.data.upvotedBy,
-              downvotedBy: response.data.downvotedBy,
-            }
-          : null
-      );
-    } catch (error) {
-      console.error("Error downvoting post:", error);
     }
   };
 
@@ -231,32 +205,6 @@ const PostDetailPage = () => {
             <span className="font-bold text-2xl text-gray-700">
               {post.votes}
             </span>
-            <button
-              onClick={handleDownvote}
-              className={`flex items-center justify-center w-12 h-12 rounded-full transition-colors ${
-                !user
-                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                  : post.downvotedBy?.includes(user.uid)
-                  ? "bg-red-500 text-white hover:bg-red-600 cursor-pointer"
-                  : "bg-gray-100 hover:bg-red-100 hover:text-red-600 cursor-pointer"
-              }`}
-              aria-label={
-                user
-                  ? post.downvotedBy?.includes(user.uid)
-                    ? "Remove downvote"
-                    : "Downvote"
-                  : "Login to downvote"
-              }
-              title={
-                user
-                  ? post.downvotedBy?.includes(user.uid)
-                    ? "Remove downvote"
-                    : "Downvote this post"
-                  : "Login to downvote"
-              }
-            >
-              <FaArrowDown className="text-xl" />
-            </button>
             <span className="text-xs text-gray-500">votes</span>
           </div>
 
